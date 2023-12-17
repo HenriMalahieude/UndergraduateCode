@@ -1,0 +1,8 @@
+.vscode
+*.obj
+*.exe
+*.o
+*.jpg
+*.zip
+*.out
+*.ino
