@@ -1,0 +1,33 @@
+digraph G {
+
+Parah_Salin [label="Parah_Salin / 0"]
+Micky_Mouse [label="Micky_Mouse / 1"]
+Joe_the_Plumber [label="Joe_the_Plumber / 1"]
+Wille_E_Coyote [label="Wille_E_Coyote / 2"]
+Tilla_Tequila [label="Tilla_Tequila / 2"]
+Kim_Jong_Il [label="Kim_Jong_Il / 1"]
+Scoobie_Doo [label="Scoobie_Doo / 2"]
+Hugo_Chavez [label="Hugo_Chavez / 1"]
+
+Parah_Salin -> Joe_the_Plumber [ label = "1"]
+Parah_Salin -> Micky_Mouse [ label = "1"]
+Parah_Salin -> Kim_Jong_Il [ label = "1"]
+Parah_Salin -> Hugo_Chavez [ label = "1"]
+Micky_Mouse -> Wille_E_Coyote [ label = "1"]
+Micky_Mouse -> Scoobie_Doo [ label = "1"]
+Joe_the_Plumber -> Parah_Salin [ label = "1"]
+Joe_the_Plumber -> Wille_E_Coyote [ label = "1"]
+Joe_the_Plumber -> Tilla_Tequila [ label = "1"]
+Wille_E_Coyote -> Micky_Mouse [ label = "1"]
+Tilla_Tequila -> Parah_Salin [ label = "1"]
+Tilla_Tequila -> Joe_the_Plumber [ label = "1"]
+Tilla_Tequila -> Scoobie_Doo [ label = "1"]
+Kim_Jong_Il -> Micky_Mouse [ label = "1"]
+Kim_Jong_Il -> Tilla_Tequila [ label = "1"]
+Kim_Jong_Il -> Joe_the_Plumber [ label = "1"]
+Scoobie_Doo -> Wille_E_Coyote [ label = "1"]
+Hugo_Chavez -> Parah_Salin [ label = "1"]
+Hugo_Chavez -> Micky_Mouse [ label = "1"]
+Hugo_Chavez -> Scoobie_Doo [ label = "1"]
+
+}

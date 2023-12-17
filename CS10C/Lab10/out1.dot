@@ -1,0 +1,20 @@
+digraph G {
+
+Micky_Mouse [label="Micky_Mouse / 0"]
+Parah_Salin [label="Parah_Salin / 1"]
+Joe_the_Plumber [label="Joe_the_Plumber / 2"]
+Wille_E_Coyote [label="Wille_E_Coyote / 3"]
+Tilla_Tequila [label="Tilla_Tequila / 4"]
+Kim_Jong_Il [label="Kim_Jong_Il / 1"]
+Scoobie_Doo [label="Scoobie_Doo / 2"]
+Hugo_Chavez [label="Hugo_Chavez / 3"]
+
+Micky_Mouse -> Parah_Salin [ label = "1"]
+Micky_Mouse -> Kim_Jong_Il [ label = "1"]
+Parah_Salin -> Joe_the_Plumber [ label = "1"]
+Joe_the_Plumber -> Wille_E_Coyote [ label = "1"]
+Wille_E_Coyote -> Tilla_Tequila [ label = "1"]
+Kim_Jong_Il -> Scoobie_Doo [ label = "1"]
+Scoobie_Doo -> Hugo_Chavez [ label = "1"]
+
+}

@@ -1,0 +1,7 @@
+digraph G {
+abc -> a;
+b -> asd;
+c -> ert;
+b -> c;
+abc -> b;
+}

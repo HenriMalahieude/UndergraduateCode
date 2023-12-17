@@ -1,0 +1,6 @@
+digraph G {
+plus0 -> multiply0
+multiply0 -> c_2
+multiply0 -> b_1
+plus0 -> a_0
+}
