@@ -1,0 +1,120 @@
+$date
+	Thu Apr 21 09:55:29 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module mux_st $end
+$var wire 1 ! d $end
+$var wire 1 " i0 $end
+$var wire 1 # i1 $end
+$var wire 1 $ i2 $end
+$var wire 1 % i3 $end
+$var wire 1 & s0 $end
+$var wire 1 ' s1 $end
+$var wire 1 ( r4 $end
+$var wire 1 ) r3 $end
+$var wire 1 * r2 $end
+$var wire 1 + r1 $end
+$scope module c1 $end
+$var wire 1 , a $end
+$var wire 1 - b $end
+$var wire 1 " c $end
+$var wire 1 + r $end
+$upscope $end
+$scope module c2 $end
+$var wire 1 . a $end
+$var wire 1 & b $end
+$var wire 1 # c $end
+$var wire 1 * r $end
+$upscope $end
+$scope module c3 $end
+$var wire 1 ' a $end
+$var wire 1 / b $end
+$var wire 1 $ c $end
+$var wire 1 ) r $end
+$upscope $end
+$scope module c4 $end
+$var wire 1 ' a $end
+$var wire 1 & b $end
+$var wire 1 % c $end
+$var wire 1 ( r $end
+$upscope $end
+$upscope $end
+$scope module mux_tb $end
+$var wire 1 0 d $end
+$var reg 1 1 i0 $end
+$var reg 1 2 i1 $end
+$var reg 1 3 i2 $end
+$var reg 1 4 i3 $end
+$var reg 1 5 s0 $end
+$var reg 1 6 s1 $end
+$scope module uut $end
+$var wire 1 1 i0 $end
+$var wire 1 2 i1 $end
+$var wire 1 3 i2 $end
+$var wire 1 4 i3 $end
+$var wire 1 5 s0 $end
+$var wire 1 6 s1 $end
+$var reg 1 0 d $end
+$upscope $end
+$scope task o $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+06
+05
+04
+13
+02
+11
+10
+z/
+z.
+z-
+z,
+x+
+x*
+x)
+x(
+z'
+z&
+z%
+z$
+z#
+z"
+x!
+$end
+#100
+00
+15
+#200
+10
+05
+16
+#300
+00
+15
+#400
+05
+06
+14
+03
+12
+01
+#500
+10
+15
+#600
+00
+05
+16
+#700
+10
+15
+#800
