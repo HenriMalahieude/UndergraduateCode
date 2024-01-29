@@ -44,7 +44,7 @@ def get_next_dir(grid: List[List[str]], pos: Tuple[int, int]):
 class SearchAlgorithm:
 	# Implement Uniform search
 	@staticmethod
-	def uniform_search(grid: List[List[str]]) -> Tuple[int, List[List[str]]]: #Passes 1->5
+	def uniform_search(grid: List[List[str]]) -> Tuple[int, List[List[str]]]: #Passes 1->5 #TODO: Make it clockwise, not weird for dirs
 		start, goal = get_ends(grid)
 		count = 1
 		hp = [(0, start)]; heapq.heapify(hp)
@@ -59,11 +59,11 @@ class SearchAlgorithm:
 			if (x-1) >= 0 and grid[y][x-1] != "-1": #Left
 				nposs.append((y, x-1))
 
-			if (x+1) < len(grid[0]) and grid[y][x+1] != "-1": #Right
-				nposs.append((y, x+1))
-
 			if (y+1) < len(grid) and grid[y+1][x] != "-1": #Down
 				nposs.append((y+1, x))
+
+			if (x+1) < len(grid[0]) and grid[y][x+1] != "-1": #Right
+				nposs.append((y, x+1))
 
 			return nposs
 
@@ -142,8 +142,25 @@ class SearchAlgorithm:
 	# Implement Best First Search
 	@staticmethod
 	def best_first_search(grid: List[List[str]]) -> Tuple[int, List[List[str]]]:
-		# Your code here
-		pass
+		start, goal = get_ends(grid)
+		hp = []; heapq.heappush(hp, (manhanttan_distance(start, goal), start))
+		visited = []
+		count = 1
+		while len(hp) > 0 and hp[0][1] != goal:
+			current = heapq.heappop(hp)
+			cur_coord = cy, cx = current[1]
+			if grid[cy][cx] != "t" and grid[cy][cx] != "s":
+				grid[cy][cx] = str(count)
+				count += 1
+
+			visited.append(cur_coord)
+			n_posis = get_next_dir(grid, cur_coord)
+			for npos in n_posis:
+				hready = (manhanttan_distance(npos, goal), npos)
+				if npos not in visited and hready not in hp:
+					heapq.heappush(hp, hready)
+
+		return (len(hp) > 0 and hp[0][1] == goal, grid)
 
 	# Implement A* Search
 	@staticmethod
@@ -220,7 +237,7 @@ if __name__ == "__main__":
 		['0', '0', '0', '-1', '0'],
 	]
 
-	found, final_state = SearchAlgorithm.uniform_search(example4)
+	found, final_state = SearchAlgorithm.uniform_search(example5)
 
 	if found == 1:
 		print("Target found!")
