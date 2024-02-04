@@ -165,8 +165,62 @@ class SearchAlgorithm:
 	# Implement A* Search
 	@staticmethod
 	def a_star_search(grid: List[List[str]]) -> Tuple[int, List[List[str]]]:
-		# Your code here
-		pass
+		start, goal = get_ends(grid)
+		m, n = len(grid), len(grid[0])
+		cost = [[(m * n + 1) for _ in range(n)] for _ in range(m)]
+		dist = [[(manhanttan_distance((y, x), goal) if grid[y][x] != "-1" else (m * n * 2)) for x in range(n)] for y in range(m)]
+		count = 1
+		current = start; cost[start[0]][start[1]] = 0
+		visited = [start]
+
+		def next_lowest_point(): #precedence to those with lower distance
+			lowest_cost = (m*n*4)
+			for y in range(m):
+				for x in range(n):
+					if (y, x) not in visited and grid[y][x] != "-1":
+						total = cost[y][x] + dist[y][x]
+						if lowest_cost > total:
+							lowest_cost = total
+			coords = []
+			for y in range(m):
+				for x in range(n):
+					if (y, x) not in visited and grid[y][x] != "-1":
+						total = cost[y][x] + dist[y][x]
+						if total == lowest_cost:
+							coords.append((y, x))
+			
+			rcoord = coords[0]
+			for pos in coords:
+				ny, nx = pos
+				cy, cx = rcoord
+				if dist[cy][cx] > dist[ny][nx]:
+					rcoord = pos
+
+			return rcoord
+
+		while current != goal and len(visited) < (m*n):
+			visited.append(current)
+			cy, cx = current
+			print("Currently at", current, "w/ cost of", cost[cy][cx], "& dist of", dist[cy][cx])
+			if grid[cy][cx] != "s" and grid[cy][cx] != "t":
+				grid[cy][cx] = str(count)
+				count += 1
+
+			n_posis = get_next_dir(grid, current)
+			for npos in n_posis:
+				ny, nx = npos
+				if npos not in visited:
+					n_cost = cost[cy][cx] + 1
+					print("\tUpdating cost for", npos, "to", n_cost, "which has distance of", dist[ny][nx])
+					if cost[ny][nx] > n_cost: #NOTE: This may be deleted if it doesn't match the examples
+						cost[ny][nx] = n_cost
+			
+			current = next_lowest_point()
+			print("Moving to", current, "w/ cost of", cost[current[0]][current[1]], "& dist of", dist[current[0]][current[1]])
+			print_grid(grid)
+			input()
+		
+		return (current == goal, grid)
 
 	# Implement Greedy Search
 	@staticmethod
@@ -237,7 +291,7 @@ if __name__ == "__main__":
 		['0', '0', '0', '-1', '0'],
 	]
 
-	found, final_state = SearchAlgorithm.uniform_search(example5)
+	found, final_state = SearchAlgorithm.a_star_search(example2)
 
 	if found == 1:
 		print("Target found!")
