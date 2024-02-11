@@ -82,7 +82,8 @@ class SearchAlgorithm:
 				if pos not in visited and hready not in hp:
 					heapq.heappush(hp, hready)
 		
-		return (len(hp) > 0 and hp[0][1] == goal, grid)
+		out = (1 if (len(hp) > 0 and hp[0][1] == goal) else -1)
+		return (out, grid)
 
 	# Implement Depth First Search
 	@staticmethod
@@ -113,7 +114,8 @@ class SearchAlgorithm:
 				path.pop() #remove current, is definitely not part of path
 				used.append(current) #mark as visited to avoid confusion
 		
-		return ((len(path) > 0 and path[-1] == goal), grid)
+		out = (1 if (len(path) > 0 and path[-1] == goal) else -1)
+		return (out, grid)
 
 	# Implement Breadth First Search
 	@staticmethod
@@ -136,8 +138,9 @@ class SearchAlgorithm:
 				y, x = pos
 				if not (pos in visited) and not (pos in q):
 					q.append(pos)
-			
-		return ((len(q) > 0 and q[0] == goal), grid)
+		
+		out = (1 if (len(q) > 0 and q[0] == goal) else -1)
+		return (out, grid)
 					
 	# Implement Best First Search
 	@staticmethod
@@ -160,68 +163,49 @@ class SearchAlgorithm:
 				if npos not in visited and hready not in hp:
 					heapq.heappush(hp, hready)
 
-		return (len(hp) > 0 and hp[0][1] == goal, grid)
+		out = (1 if (len(hp) > 0 and hp[0][1] == goal) else -1)
+		return (out, grid)
 
 	# Implement A* Search
 	@staticmethod
 	def a_star_search(grid: List[List[str]]) -> Tuple[int, List[List[str]]]:
-		start, goal = get_ends(grid)
-		m, n = len(grid), len(grid[0])
-		cost = [[(m * n + 1) for _ in range(n)] for _ in range(m)]
-		dist = [[(manhanttan_distance((y, x), goal) if grid[y][x] != "-1" else (m * n * 2)) for x in range(n)] for y in range(m)]
+		start, goal = get_ends(grid) #goal = (y, x), start = (y, x)
+		hp = [(manhanttan_distance(start, goal), start[0], start[1])]; heapq.heapify(hp)
+		visited = []
 		count = 1
-		current = start; cost[start[0]][start[1]] = 0
-		visited = [start]
 
-		def next_lowest_point(): #precedence to those with lower distance
-			lowest_cost = (m*n*4)
-			for y in range(m):
-				for x in range(n):
-					if (y, x) not in visited and grid[y][x] != "-1":
-						total = cost[y][x] + dist[y][x]
-						if lowest_cost > total:
-							lowest_cost = total
-			coords = []
-			for y in range(m):
-				for x in range(n):
-					if (y, x) not in visited and grid[y][x] != "-1":
-						total = cost[y][x] + dist[y][x]
-						if total == lowest_cost:
-							coords.append((y, x))
-			
-			rcoord = coords[0]
-			for pos in coords:
-				ny, nx = pos
-				cy, cx = rcoord
-				if dist[cy][cx] > dist[ny][nx]:
-					rcoord = pos
+		coord = (-1, -1)
+		while len(hp) > 0 and coord != goal:
+			current = heapq.heappop(hp)
+			coord = cy, cx, = (current[1], current[2])
+			m_cost = current[0] - manhanttan_distance(goal, coord)
 
-			return rcoord
+			if (coord in visited):
+				continue
 
-		while current != goal and len(visited) < (m*n):
-			visited.append(current)
-			cy, cx = current
-			print("Currently at", current, "w/ cost of", cost[cy][cx], "& dist of", dist[cy][cx])
-			if grid[cy][cx] != "s" and grid[cy][cx] != "t":
+			visited.append(coord)
+			#print("Currently at", cy, cx)
+
+			if (grid[cy][cx] != "s" and grid[cy][cx] != "t"):
 				grid[cy][cx] = str(count)
 				count += 1
+			elif (grid[cy][cx] == "t"):
+				break
 
-			n_posis = get_next_dir(grid, current)
+			n_posis = get_next_dir(grid, coord)
 			for npos in n_posis:
-				ny, nx = npos
-				if npos not in visited:
-					n_cost = cost[cy][cx] + 1
-					print("\tUpdating cost for", npos, "to", n_cost, "which has distance of", dist[ny][nx])
-					if cost[ny][nx] > n_cost: #NOTE: This may be deleted if it doesn't match the examples
-						cost[ny][nx] = n_cost
-			
-			current = next_lowest_point()
-			print("Moving to", current, "w/ cost of", cost[current[0]][current[1]], "& dist of", dist[current[0]][current[1]])
+				hready = (manhanttan_distance(goal, npos) + m_cost + 1, npos[0], npos[1])
+				if hready not in hp and npos not in visited:
+					heapq.heappush(hp, hready)
+			"""
+			print("Current: Priority", current[0], "| Steps", m_cost, "@ y=", cy, "x=", cx)
+			print("Queue:", hp)
 			print_grid(grid)
-			input()
-		
-		return (current == goal, grid)
-
+			input("\n") #"""
+			
+		out = (1 if (len(hp) > 0 and coord == goal) else -1)
+		return (out, grid)
+	
 	# Implement Greedy Search
 	@staticmethod
 	def greedy_search(grid: List[List[str]]) -> Tuple[int, List[List[str]]]: #Passes 1->5
@@ -249,8 +233,8 @@ class SearchAlgorithm:
 					count += 1
 			else:
 				break
-
-		return (path[-1] == goal, grid)
+		out = (1 if path[-1] == goal else -1)
+		return (out, grid)
 
 if __name__ == "__main__":
 	example1 = [
@@ -290,8 +274,34 @@ if __name__ == "__main__":
 		['0', '0', '0', '-1', 't'],
 		['0', '0', '0', '-1', '0'],
 	]
+	
+	example6 = [
+		["0", "0", "-1", "0", "0", "0", "0", "0", "0", "-1"],
+		["-1", "0", "-1", "0", "t", "-1", "0", "0", "-1", "-1"],
+		["-1", "0", "-1", "0", "0", "0", "0", "-1",  "0", "0"],
+		["-1", "0", "0", "0", "0", "0", "0", "-1", "0", "-1"],
+		["-1", "0", "-1", "0", "-1", "-1", "0", "-1", "-1", "-1"],
+		["-1", "0", "0", "0", "-1", "0", "0", "-1", "0", "-1"],
+		["-1", "0", "-1", "-1", "-1", "-1", "0", "0", "0", "-1"],
+		["-1", "0", "0", "-1", "s", "0", "0", " 0", "-1",  "0"],
+		["0", "-1", "0", "0", "0", "0", "0", "-1", "-1", "0"],
+		["0", "-1", "0", "0", "0", "0", "0", "0", "0", "0"],
+	]
 
-	found, final_state = SearchAlgorithm.a_star_search(example2)
+	example7 = [
+		["0",  "-1", "-1", "-1",  "0", "-1", "-1", "-1", "-1", "-1"],
+		["-1",  "0", "-1", "-1",  "0", "-1",  "0",  "0",  "0",  "0"],
+		[" 0",  "0",  "0", "-1", "-1",  "0",  "0",  "0",  "0",  "0"],
+		["-1",  "0",  "0", "-1",  "0",  "0",  "0", "-1",  "0", "-1"],
+		["-1",  "0",  "0",  "0", "-1",  "t",  "0",  "0", "-1",  "0"],
+		["-1",  "0",  "s", "-1",  "0",  "0", "-1",  "0",  "0", "-1"],
+		["0",   "0",  "0",  "0", "-1",  "0",  "0",  "0",  "0", "-1"],
+		["-1", "-1", "-1",  "0",  "0",  "0",  "0",  "0",  "0",  "0"],
+		["-1", "-1", "-1",  "0", "-1", "-1",  "0", "-1", "-1",  "0"],
+		["-1",  "0", "-1",  "0",  "0", "-1", "-1",  "0",  "0",  "0"],
+	]
+
+	found, final_state = SearchAlgorithm.a_star_search(example6)
 
 	if found == 1:
 		print("Target found!")
