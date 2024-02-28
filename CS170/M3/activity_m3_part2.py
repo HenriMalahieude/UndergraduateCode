@@ -1,65 +1,69 @@
 from typing import List, Tuple
 
-def get_value(row, index):
-    if index < 0 or index >= len(row):
-        return 0
-    
-    return row[index]
-
-def set_value(row, index, val):
-    if index < 0 or index >= len(row):
-        return
-    row[index] = val
-
 class ActivityM3:
     @staticmethod
     def find_whisperers_1d(row: List[int]) -> Tuple[int, List[int]]:
-        output = [0 for _ in range(len(row))]
+        m = len(row)
+        output = []
         score = 0
     
         i = 0
-        while i < len(row):
-            u = get_value(row, i - 3)
-            v = get_value(row, i - 2)
-            w = get_value(row, i - 1)
-            x = get_value(row, i)
-            y = get_value(row, i + 1)
-            z = get_value(row, i + 2)
+        while i < m:
+            up = i - 3; u = 0 if up < 0 else row[up]
+            vp = i - 2; v = 0 if vp < 0 else row[vp]
+            wp = i - 1; w = 0 if wp < 0 else row[wp]
+            xp = i    ; x = row[xp]
+            yp = i + 1; y = 0 if yp >= len(row) else row[yp]
+            zp = i + 2; z = 0 if zp >= len(row) else row[zp]
 
             if (v == 0 and w == 0) or (v == 1 and w == 0): #Catch first normal case, and starting case
-                if (x + z) > y:
-                    set_value(output, i  , 1); score += x #x = 1
-                    set_value(output, i+1, 0);            #y = 0
-                    set_value(output, i+2, 1); score += z #z = 1
-                else: # (x + z) <= y
-                    set_value(output, i  , 0)             #x = 0
-                    set_value(output, i+1, 1); score += y #y = 1
-                    set_value(output, i+2, 0)             #z = 0
+                if (x + z) > y: #Set xyz = 101
+                    output.append(1); score += x
+                    if yp < len(row):
+                       output.append(0)
+                    
+                    if zp < len(row):
+                        output.append(1); score += z
+                else: # (x + z) <= y || Set xyz = 010
+                    output.append(0)
+                    
+                    if yp < len(row):
+                        output.append(1); score += y
+                    
+                    if zp < len(row):
+                        output.append(0)
             else: #v == 0 and w == 1
                 if (x + z) > y: #can we set 101?
-                    if w >= x:
-                        set_value(output, i  , 0)             #x = 0
-                        set_value(output, i+1, 0)             #y = 0
-                        set_value(output, i+2, 1); score += z #z = 1
-                    else: #w < x
-                        if u == 0: #Means we can take this score
-                            set_value(output, i-2, 1); score += v #v = 1
+                    if w >= x: #No we can only set 001
+                        output.append(0)
+                        if yp < len(row):
+                            output.append(0)
+                        
+                        if zp < len(row):
+                            output.append(1); score += z
 
-                        set_value(output, i-1, 0); score -= w #w = 0 bc w < x
-                        set_value(output, i  , 1); score += x #x = 1 bc w < x
-                        set_value(output, i+1, 0)             #y = 0
-                        set_value(output, i+2, 1); score += z #z = 1
-                else: #(x + z) < y
-                    set_value(output, i  , 0)             #x = 0
-                    set_value(output, i+1, 1); score += y #y = 1
-                    set_value(output, i+2, 0)             #z = 0
+                    else: #w < x || Yes we can set 101
+                        if u == 0: #Means we can add this score
+                            output[vp] = 1; score += v #v = 1
+
+                        output[wp] = 0; score -= w               #w = 0 bc w < x
+                        output.append(1); score += x #x = 1 bc w < x
+
+                        if yp < len(row):
+                            output.append(0)
+                        
+                        if zp < len(row):
+                            output.append(1); score += z
+                else: #(x + z) < y || Set 010
+                    output.append(0)
+
+                    if yp < len(row):
+                        output.append(1); score += y
+                    
+                    if zp < len(row):
+                        output.append(0)
 
             i += 3 #Context window of 3, plus look behind of 3
-            #print("Current Score:", score)
-            #print("In_Grid:", row)
-            #print("Out_Grid:", output)
-            #print("Iteration:", i)
-            #input("------\n")
 
         return score, output
             
