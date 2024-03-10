@@ -4,7 +4,15 @@ import heapq
 
 def print_grid(grid: List[List[str]]):
 	for row in grid:
-		print(' '.join(row))
+		for lmnt in row:
+			if len(lmnt) != 2:
+				print("", lmnt, end="")
+			else:
+				print(lmnt, end="")
+			print(" ", end="")
+		print()
+
+
 
 def get_ends(grid: List[List[str]]) -> Tuple[Tuple[int, int], Tuple[int, int]]:
 	start, goal = (-1, -1), (-1, -1)
@@ -96,7 +104,7 @@ class SearchAlgorithm:
 					heapq.heappush(hp, hready)
 					prev_matrix[pos[0]][pos[1]] = cur_coord
 		
-		return get_path_from_prev_matrix(prev_matrix, goal)
+		return get_path_from_prev_matrix(prev_matrix, goal) if (len(hp) > 0 and hp[0][1] == goal) else []
 
 	# Implement Depth First Search
 	@staticmethod
@@ -112,6 +120,10 @@ class SearchAlgorithm:
 			for elem in new_posis: #Remove all the ones we've already visited
 				if not (elem in used) and not (elem in path):
 					choosable_pos.append(elem)
+			
+			if (goal in choosable_pos):
+				path.append(goal)
+				break
 			
 			choosable_pos.reverse() #Because LIFO procedures? I'm sorry that doesn't make sense to me
 			chose_dir = (-1, -1) if len(choosable_pos) <= 0 else choosable_pos[0]
@@ -154,7 +166,7 @@ class SearchAlgorithm:
 					q.append(pos)
 					prev_matrix[y][x] = current
 		
-		return get_path_from_prev_matrix(prev_matrix, goal)
+		return get_path_from_prev_matrix(prev_matrix, goal) if (len(q) > 0 and q[0] == goal) else []
 					
 	# Implement Best First Search
 	@staticmethod
@@ -180,12 +192,12 @@ class SearchAlgorithm:
 					heapq.heappush(hp, hready)
 					prev_matrix[npos[0]][npos[1]] = cur_coord
 
-		return get_path_from_prev_matrix(prev_matrix, goal)
+		return get_path_from_prev_matrix(prev_matrix, goal) if (len(hp) > 0 and hp[0][1] == goal) else []
 
 	# Implement A* Search
 	@staticmethod
 	def a_star_search(grid: List[List[str]]) -> List[Tuple[int, int]]:
-		prev_matrix = [[(-1, -1) for _ in range(len(grid[0]))] for _ in range(len(grid))]
+		prev_matrix = [[(-1, -1, -1) for _ in range(len(grid[0]))] for _ in range(len(grid))]
 
 		start, goal = get_ends(grid) #goal = (y, x), start = (y, x)
 		hp = [(manhanttan_distance(start, goal), start[0], start[1])]; heapq.heapify(hp)
@@ -202,22 +214,24 @@ class SearchAlgorithm:
 				continue
 
 			visited.append(coord)
-			#print("Currently at", cy, cx)
-
-			#if (grid[cy][cx] != "s" and grid[cy][cx] != "t"):
-			#	grid[cy][cx] = str(count)
-			#	count += 1
 			if (grid[cy][cx] == "t"):
 				break
 
+			#print_grid(grid)
+			#print("Currently at:", coord)
+			#grid[cy][cx] = "V"
+
 			n_posis = get_next_dir(grid, coord)
+			#print("\tNext Possible are:")
 			for npos in n_posis:
 				hready = (manhanttan_distance(goal, npos) + m_cost + 1, npos[0], npos[1])
-				if hready not in hp and npos not in visited:
+				if hready not in hp and npos not in visited and prev_matrix[npos[0]][npos[1]] == (-1, -1):
+					#print("\t\t", npos)
 					heapq.heappush(hp, hready)
 					prev_matrix[npos[0]][npos[1]] = coord
+			#input("\n")
 			
-		return get_path_from_prev_matrix(prev_matrix, goal)
+		return get_path_from_prev_matrix(prev_matrix, goal) if (coord == goal) else []
 	
 	# Implement Greedy Search
 	@staticmethod
@@ -247,7 +261,7 @@ class SearchAlgorithm:
 			else:
 				break
 		
-		return path
+		return path if path[-1] == goal else []
 
 if __name__ == "__main__":
 	example1 = [
@@ -314,6 +328,20 @@ if __name__ == "__main__":
 		["-1",  "0", "-1",  "0",  "0", "-1", "-1",  "0",  "0",  "0"],
 	]
 
-	path = SearchAlgorithm.uniform_search(example1)
-	print_grid(example1)
+	example8 = [
+		["-1", "0", "0", "0", "0", "0", "-1", "0", "0", "-1"],
+		["-1", "-1", "0", "0", "-1", "-1", "0", "0", "-1", "0"],
+		["0", "-1", "-1", "0", "-1", "0", "0", "0", "-1", "0"],
+		["-1", "-1", "0", "0", "0", "t", "-1", "-1", "0", "0"],
+		["0", "0", "-1", "-1", "0", "0", "0", "-1", "-1", "0"],
+		["0", "0", "0", "-1", "-1", "0", "0", "0", "-1", "0"],
+		["0", "0", "0", "0", "0", "0", "-1", "-1", "-1", "-1"],
+		["s", "-1", "-1", "-1", "-1", "-1", "0", "-1", "0", "0"],
+		["0", "-1", "-1", "0", "-1", "0", "-1", "0", "-1", "0"],
+		["-1", "0", "-1", "0", "0", "0", "0", "0", "-1", "-1"]
+	]
+
+	path = SearchAlgorithm.a_star_search(example6)
+	print_grid(example6)
+	print("Length:", len(path))
 	print(path)
