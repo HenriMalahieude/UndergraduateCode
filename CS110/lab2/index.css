@@ -1,0 +1,281 @@
+/* Feel free to edit CSS of body if you'd like. We provide you the light gray background color and font family in the body styling */
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0;
+  background-color: #e6ecf0;
+}
+
+/* TODO: Create CSS for your Twitter Mockup */
+#topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 46px;
+  z-index: 100;
+  background-color: white;
+}
+
+#topbar #topbar-margin {
+  width: 10%;
+}
+
+#topbar-container {
+  display: flex;
+}
+
+#topbar-container #tbc-text {
+  display: flex;
+  text-align: center;
+  margin-top: 1em;
+  height: fit-content;
+}
+
+.nav-desktop {
+  margin-right: 3em;
+  display: block !important;
+  color: gray;
+}
+
+.nav-desktop:hover {
+  color: #4AB3F4;
+  border-bottom: 2px solid #4AB3F4;
+}
+
+.nav-mobile {
+  margin-right: 2em;
+  display: none !important;
+  color: gray;
+}
+
+#topbar-container #logo {
+  position: absolute;
+  margin-top: 0.5em;
+  width: 2em;
+  margin-left: 50%;
+}
+
+@media only screen and (max-width: 1100px) {
+  .nav-mobile {
+    display: block !important;
+  }
+
+  .nav-desktop {
+    display: none !important;
+  }
+
+  #topbar #topbar-margin {
+    width: 1em;
+  }
+}
+
+#tweet {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 1%;
+  text-align:center;
+  background-color: #4AB3F4;
+  color: white;
+  border-radius: 1em;
+  height: 1.7rem;
+  width: 4rem;
+  margin-top:0.5em;
+}
+
+#tweet span {
+  margin-left:0.5em;
+  display: flex;
+  align-items: end;
+}
+
+.content-wrapper {
+  max-width: 90em;
+  margin: 56px auto;
+  display: flex;
+}
+
+.content-left {
+  display: flex;
+  flex-direction: column;
+  width: 298px;
+  height: 15em;
+  background-color: white;
+  margin-right: 10px;
+}
+
+.profile-banner {
+  background-color: black;
+  z-index: 1;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  padding-left: 5em;
+  padding-right: 5em;
+}
+
+.profile-details {
+  display: flex;
+  z-index: 2;
+  margin-left:1em;
+  margin-top:-2em;
+}
+
+.profile-picture {
+  width: 6em;
+  height: 6em;
+  border-color: white;
+  border-style: solid;
+  border-radius: 150%;
+}
+
+.profile-identifier {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.5em;
+  margin-left: 2em;
+}
+
+.pfpi-display-name {
+  color: black;
+  text-decoration: underline solid;
+}
+
+.pfpi-atname {
+  color: gray;
+}
+
+.profile-stats {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-stats div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ps-title {
+  color: gray;
+  margin-bottom: 0.5em;
+}
+
+.ps-stat {
+  color: #4AB3F4;
+}
+
+.tweet-info {
+  background-color: white;
+  display: flex;
+  border-bottom: 1px solid #e6ecf0;
+  min-height: 51px;
+}
+
+.tweet-pfp {
+  border-radius: 150%;
+  width: 48px;
+  height: 48px;
+  margin-top: 1em;
+  margin-left: 0.5em;
+}
+
+.tweet-content {
+  margin-top: 1em;
+  margin-left: 0.5em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-metadata {
+  margin-top: 0.5em;
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.tc-metadata div {
+  margin-right: 0.4em;
+}
+
+.tcm-atname {
+  color: gray;
+}
+
+.tcm-date {
+  color: gray;
+}
+
+.tc-message {
+  font-size: large;
+}
+
+.tc-message span {
+  text-decoration: underline;
+}
+
+.content-right {
+  width: 25em;
+  height: 30em;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: white; 
+}
+
+.wtf-title {
+  margin-top: 0.8em;
+  margin-left: 0.8em;
+  font-size:larger;
+}
+
+.wtf-suggestion {
+  display: flex;
+  margin-left: 0.5em;
+  margin-top: 1em;
+  border-bottom: 1px solid #e6ecf0;
+  background-color: white;
+}
+
+.wtf-pfp {
+  width: 48px;
+  height: 48px;
+  border-radius: 150%;
+}
+
+.wtfs-details {
+  margin-left: 1em;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.wtfs-metadata {
+  display: flex;
+}
+
+.wtfsm-displayname {
+  color: black;
+}
+
+.wtfsm-atname {
+  color: gray;
+}
+
+.wtf-followbutton {
+  margin-top: 1em;
+  margin-left: 0.5em;
+  width: 5em;
+  height: 1.1em;
+  color: #4AB3F4;
+  border-radius: 1em;
+  border: solid #4AB3F4;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1100px) {
+  .content-right {
+    display: none;
+  }
+}
