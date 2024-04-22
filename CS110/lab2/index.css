@@ -48,6 +48,11 @@ body {
   color: gray;
 }
 
+.nav-mobile:hover {
+  color: #4AB3F4;
+  border-bottom: 2px solid #4AB3F4;
+}
+
 #topbar-container #logo {
   position: absolute;
   margin-top: 0.5em;
@@ -90,18 +95,20 @@ body {
 }
 
 .content-wrapper {
-  max-width: 90em;
+  max-width: 1198px;/*90em;*/
   margin: 56px auto;
   display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  width: 90%;
 }
 
 .content-left {
   display: flex;
   flex-direction: column;
-  width: 298px;
+  max-width: 298px;
   height: 15em;
   background-color: white;
-  margin-right: 10px;
 }
 
 .profile-banner {
@@ -164,6 +171,11 @@ body {
 
 .ps-stat {
   color: #4AB3F4;
+  margin-left: 0.25em;
+}
+
+.content-center {
+  width: 70%;
 }
 
 .tweet-info {
@@ -216,37 +228,43 @@ body {
 }
 
 .content-right {
-  width: 25em;
-  height: 30em;
-  margin-left: 10px;
+  width: 390px;/*25em;*/
   display: flex;
   flex-direction: column;
-  background-color: white; 
 }
 
 .wtf-title {
+  width: 100%;
+  display: flex;
+  background-color: white;
+}
+
+.wtf-title strong {
   margin-top: 0.8em;
-  margin-left: 0.8em;
+  margin-left: 0.7em;
   font-size:larger;
 }
 
 .wtf-suggestion {
   display: flex;
-  margin-left: 0.5em;
-  margin-top: 1em;
+  width: 100%;
   border-bottom: 1px solid #e6ecf0;
   background-color: white;
 }
 
 .wtf-pfp {
+  margin-left: 0.5em;
+  margin-top: 1.25em;
   width: 48px;
   height: 48px;
   border-radius: 150%;
 }
 
 .wtfs-details {
-  margin-left: 1em;
-  margin-bottom: 2em;
+  margin-left: 0.5em;
+  margin-right: 0.1em;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
   display: flex;
   flex-direction: column;
 }

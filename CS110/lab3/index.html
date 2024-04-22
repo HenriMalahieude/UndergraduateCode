@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe Game</title>
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <h1>Tic Tac Toe</h1>
+    <h3 id="display_score">X: 0, O: 0</h3>
+    <h2 id="display_turn">It's X's Turn.</h2>
+
+    <div class="game_board">
+      <div class='row'>
+        <div class="one" onclick="mark_square('one')"><span class="xo"></span></div>
+        <div class="two" onclick="mark_square('two')"><span class="xo"></span></div>
+        <div class="three" onclick="mark_square('three')"><span class="xo"></span></div>
+      </div>
+      <div class='row'>
+        <div class="four" onclick="mark_square('four')"><span class="xo"></span></div>
+        <div class="five" onclick="mark_square('five')"><span class="xo"></span></div>
+        <div class="six" onclick="mark_square('six')"><span class="xo"></span></div>
+      </div>
+      <div class='row'>
+        <div class="seven" onclick="mark_square('seven')"><span class="xo"></span></div>
+        <div class="eight" onclick="mark_square('eight')"><span class="xo"></span></div>
+        <div class="nine" onclick="mark_square('nine')"><span class="xo"></span></div>
+      </div>
+    </div>
+
+    <button class="new_game" onclick="reset_board()">New Game</button>
+    <button class="reset" onclick="reset_all()">Reset</button>
+    <label class="single_player">Two-player Mode
+      <input id="robocheck" type="checkbox" checked="checked" onclick="robo_time()">
+    </label>
+    <script src="main.js"></script>
+  </body>
+
+
+</html>
