@@ -1,0 +1,104 @@
+body {
+	display: flex;
+	background-color: #222222;;
+	gap: 5em;
+	margin: 56px auto;
+}
+
+.filter-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	background-color: white;
+	border-radius: 10px;
+	margin-left: 5em;
+
+	padding-left: 2em;
+	padding-right: 2em;
+	
+	min-width: 8em;
+	width: 8em;
+	height: 15em;
+}
+
+.fc-title {
+	text-decoration: solid black;
+	font-weight: bold;
+	font-size: large;
+	margin-top: 0.1em;
+}
+
+.fct-title {
+	text-decoration: solid black;
+	font-weight: bold;
+	margin-bottom: 0.1em;
+}
+
+.article-container {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	max-width: 1200px;
+	margin-right: 5em;
+	gap: 0.5em;
+}
+
+.article {
+	display: flex;
+	flex-direction: column;
+	background-color: #555555;
+	width: 100%;
+	border-radius: 10px;
+}
+
+.a-meta {
+	margin-top: 0.1em;
+	margin-bottom: 0.2em;
+	margin-right: 0.3em;
+	margin-left: 0.4em;
+	display: flex;
+	flex-wrap: wrap;
+	font-size: large;
+}
+
+.am-title {
+	font-weight: bold;
+}
+
+.am-date {
+	flex: 50%;
+	text-align: right;
+	color: #999999;
+}
+
+.a-details {
+	display: flex;
+	margin-bottom: 0.9em;
+}
+
+.ad-thumbnail {
+	border-radius: 10px;
+	height: 4.5em;
+	width: 8em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.ad-blurb {
+	margin-right: 1em;
+}
+
+@media screen and (width <= 900px) {
+	body {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.filter-container {
+		margin-left: 0;
+	}
+
+	.article-container {
+		margin-right: 0;
+	}
+}
