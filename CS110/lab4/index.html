@@ -3,6 +3,7 @@
 	<meta charset="utf-8">
 	<title>New York Api (hmala001)</title>
 	<link rel="stylesheet" href="style.css">
+	<script src="main.js"></script>
 </head>
 
 <body>
@@ -10,24 +11,24 @@
 		<div class="fc-title">Filters</div>
 		<div class="fc-theme">
 			<div class="fct-title">Sort By:</div>
-			<input type="radio" id="sortby-viewed" name="sortbyer" value="Most Viewed">
+			<input type="radio" id="sortby-viewed" name="sortbyer" value="Most Viewed" onchange="update_articles()">
 			<label for="sortby-viewed">Most Viewed</label><br>
 
-			<input type="radio" id="sortby-shared" name="sortbyer" value="Most Shared">
+			<input type="radio" id="sortby-shared" name="sortbyer" value="Most Shared" onchange="update_articles()">
 			<label for="sortby-shared">Most Shared</label><br>
 
-			<input type="radio" id="sortby-emailed" name="sortbyer" value="Most Emailed">
+			<input type="radio" id="sortby-emailed" name="sortbyer" value="Most Emailed" onchange="update_articles()">
 			<label for="sortby-emailed">Most Emailed</label><br>
 		</div>
 		<div class="fc-theme">
 			<div class="fct-title">Time Frame:</div>
-			<input type="radio" id="tf-day" name="timeframe" value="Day">
+			<input type="radio" id="tf-day" name="timeframe" value="Day" onchange="update_articles()">
 			<label for="tf-day">Day</label><br>
 
-			<input type="radio" id="tf-week" name="timeframe" value="Week">
+			<input type="radio" id="tf-week" name="timeframe" value="Week" onchange="update_articles()">
 			<label for="tf-week">Week</label><br>
 
-			<input type="radio" id="tf-month" name="timeframe" value="Month">
+			<input type="radio" id="tf-month" name="timeframe" value="Month" onchange="update_articles()">
 			<label for="tf-month">Month</label><br>
 		</div>
 	</div>
@@ -65,5 +66,8 @@
 		</div>
 	</div>
 
-	<script src="main.js"></script>
+	<script>
+		clear_articles();
+		add_article("Please update filters!");
+	</script>
 </body>

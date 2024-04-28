@@ -1,4 +1,6 @@
-let dbnc = Date.now();
+const debounce_time = 15 //seconds
+
+let dbnc = Date.now() - (debounce_time * 1000);
 
 function clear_articles() {
 	let article_container = document.getElementsByClassName("article-container")[0];
@@ -33,6 +35,7 @@ async function update_articles() {
 	getting = true;
 
 	clear_articles();
+	add_article("Please wait, loading!");
 
 	let dif = (Date.now() - dbnc) / 1000;
 	console.log("So this is the dif " + dif);
@@ -41,21 +44,46 @@ async function update_articles() {
 
 	//get settings
 	let srtbies = document.getElementsByName("sortbyer");
-	let srtby = "Emailed";
-	if (srtbies[0].checked) srtby = "Viewed";
-	if (srtbies[1].checked) srtby = "Shared";
+	let srtby = "emailed";
+	if (srtbies[0].checked) srtby = "viewed";
+	if (srtbies[1].checked) srtby = "shared";
 
 	let tframes = document.getElementsByName("timeframe");
-	let tfrme = "Month";
-	if (tframes[0].checked) tfrme = "Day"
-	if (tframes[1].checked) tfrme = "Week"
+	let tfrme = 30; //month
+	if (tframes[0].checked) tfrme = 1 //day
+	if (tframes[1].checked) tfrme = 7 //week
 
-	const url = "";
-	fetch(url).then(res => res.json).then(data => {
+	//KhwR0H4oNA4NdXgMshnf3w6jRfST7Y7J
+	const url = `https://api.nytimes.com/svc/mostpopular/v2/${srtby}/${tfrme}.json?api-key=KhwR0H4oNA4NdXgMshnf3w6jRfST7Y7J`;
+	fetch(url).then(res => res.json()).then(data => {
+		clear_articles();
+
 		console.log(data)
+		for (let i = 0; i < data.num_results; i++) {
+			let article = data.results[i];
+
+			if (article.media.length < 1) continue; //no media, skip
+
+			let img_url = undefined;
+			for (let j = 0; j < article.media.length; j++) {
+				try{
+					if (article.media[j].type == "image") {
+						img_url = article.media[j]["media-metadata"][1].url;
+						break;
+					}
+				}catch(err) {console.log(err)}
+			}
+
+			if (img_url == undefined) continue;
+
+			add_article(article.title, article.published_date, img_url, article.abstract);
+		}
+
 		getting = false;
 	}).catch(err => {
 		console.log(err)
+		clear_articles();
+		add_article("There was an error!!", "", "", err);
 		getting = false;
 	})//*/
 }
