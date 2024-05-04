@@ -1,6 +1,6 @@
 const debounce_time = 15 //seconds
 
-let dbnc = Date.now() - (debounce_time * 1000);
+let dbnc = Date.now() - (12 * 1000);
 
 function clear_articles() {
 	let article_container = document.getElementsByClassName("article-container")[0];
@@ -53,7 +53,7 @@ async function update_articles() {
 	if (tframes[0].checked) tfrme = 1 //day
 	if (tframes[1].checked) tfrme = 7 //week
 
-	//KhwR0H4oNA4NdXgMshnf3w6jRfST7Y7J
+	//get data from nyt
 	const url = `https://api.nytimes.com/svc/mostpopular/v2/${srtby}/${tfrme}.json?api-key=KhwR0H4oNA4NdXgMshnf3w6jRfST7Y7J`;
 	fetch(url).then(res => res.json()).then(data => {
 		clear_articles();
