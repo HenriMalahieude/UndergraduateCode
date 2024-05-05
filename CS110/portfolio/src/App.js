@@ -3,7 +3,7 @@ import * as nvbr from './appNavBar'
 import {EducationSlide, ExtracurricularSlide, HomeSlide} from './appSliderTemplate'
 import {ProjectSlide} from './appProjectSlide'
 
-function App() {
+export default function App() {
   return (
     <div className="app-content">
       {nvbr.NavBar()}
@@ -21,5 +21,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
