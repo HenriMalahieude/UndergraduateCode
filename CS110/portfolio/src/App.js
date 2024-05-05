@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import * as nvbr from './appNavBar'
+import {EducationSlide, ExtracurricularSlide, HomeSlide} from './appSliderTemplate'
+import {ProjectSlide} from './appProjectSlide'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-content">
+      {nvbr.NavBar()}
+      <HomeSlide />
+      <EducationSlide />
+      <ProjectSlide />
+      <ExtracurricularSlide />
+
+      <div className="footer">
+        <p>Henri Malahieude</p>
+        <p>henrimalahieude@gmail.com</p>
+        <a href="https://github.com/HenriMalahieude">github.com/HenriMalahieude</a>
+        <a href="https://www.linkedin.com/in/henri-malahieude/">linkedin.com/in/henri-malahieude/</a>
+      </div>
     </div>
   );
 }
