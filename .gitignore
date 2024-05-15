@@ -7,6 +7,8 @@
 *.out
 *.ino
 
+node_modules/
+
 CS110/portfolio/docs/
 
 CS61/VSCodeExtension

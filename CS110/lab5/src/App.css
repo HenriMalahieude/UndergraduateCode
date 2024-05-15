@@ -1,0 +1,153 @@
+.total-container {
+	display: flex;
+	gap: 5em;
+	margin: 56px auto;
+}
+
+.top-name {
+  display: flex;
+  color: white;
+  font-family: Arial;
+  font-weight: bolder;
+  align-items: end; /*align on y*/
+  justify-content: center; /*align on x*/
+  width: 100%;
+  height: 2em;
+}
+
+.filter-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	background-color: white;
+	border-radius: 10px;
+	margin-left: 5em;
+
+	padding-left: 2em;
+	padding-right: 2em;
+	
+	min-width: 8em;
+	width: 8em;
+	height: 18.5em;
+}
+
+.fc-title {
+	text-decoration: solid black;
+	font-weight: bold;
+	font-size: large;
+	margin-top: 0.1em;
+}
+
+.fct-title {
+	text-decoration: solid black;
+	font-weight: bold;
+	margin-bottom: 0.1em;
+}
+
+.article-page {
+	width: 70%;
+}
+
+.article-container {
+	display: flex;
+	width: 100%;
+	gap: 0.2em;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.article {
+	display: flex;
+	max-width: 49%;
+	width: 49%;
+	flex-direction: column;
+	background-color: #555555;
+	width: 100%;
+	border-radius: 10px;
+}
+
+.a-meta {
+	margin-top: 0.1em;
+	margin-bottom: 0.2em;
+	margin-right: 0.3em;
+	margin-left: 0.4em;
+	display: flex;
+	flex-wrap: wrap;
+	font-size: large;
+}
+
+.am-title {
+	font-weight: bold;
+}
+
+.am-date {
+	flex: 50%;
+	text-align: right;
+	color: #999999;
+}
+
+.a-details {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 0.9em;
+}
+
+.ad-thumbnail {
+	border-radius: 10px;
+	max-height: 100%;
+	max-width: 25%;
+	width:6em;
+	height: 4em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.ad-blurb {
+	margin-right: 1em;
+}
+
+.paging-container {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+}
+
+.pager-radios {
+	display: none;
+}
+
+.paging-container label{
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	background-color: gray;
+	border: 1px solid black;
+	margin-top: 2px;
+	height: 1.1em;
+	width: 1em;
+	border-radius: 3px;
+}
+
+input {
+	max-width: 100%;
+}
+
+@media screen and (width <= 900px) {
+	.total-container {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.filter-container {
+		margin-left: 0;
+	}
+
+	.article-page {
+		width: 100%;
+	}
+
+	.paging-container {
+		width: 100%;
+	}
+}
