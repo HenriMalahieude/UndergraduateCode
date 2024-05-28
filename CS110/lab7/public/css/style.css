@@ -1,0 +1,119 @@
+/* TODO: style each page */
+
+html, body {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h2 {
+	font-size: small;
+	color: gray;
+}
+
+.chatroom-lister, .chats-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	width: 70%;
+	max-width: 1200px;
+
+	background-color: lightgray;
+	border-radius: 5px;
+	border: 2px solid gray;
+}
+
+.chats-container {
+	min-height: 50%;
+	height: 45%;
+	max-height: 50%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.chatroom-detailer {
+	display: flex;
+	width: 100%;
+	height: 2em;
+
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid gray;
+}
+
+.message {
+	display:flex;
+	flex-direction: column;
+	width: 100%;
+	border: 1px dashed darkgray;
+}
+
+.msg-meta {
+	display: flex;
+	margin-left: 0.2em;
+	gap: 1em;
+	align-items: center;
+}
+
+.mm-author {
+	font-weight: bolder;
+	font-size: large;
+}
+
+.mm-date {
+	font-weight: 100;
+	color: darkgray;
+	font-size: small;
+}
+
+.msg-contents {
+	margin-top: 0.2em;
+	margin-left: 0.2em;
+}
+
+.chatroom-meta {
+	display: flex;
+	gap: 2em;
+
+	align-items: center;
+	margin-left: 1em;
+}
+
+.cd-name {
+	font-weight: bold; 
+}
+
+.cd-id {
+	color: darkgray;
+	font-weight:100;
+}
+
+.chatroom-joiner {
+	margin-right: 1em;
+	height: 90%;
+}
+
+.create-message-container {
+	display: flex;
+
+	width: 62%;
+
+	justify-content: space-between;
+}
+
+#msgtext {
+	width: 50%; 
+	height: 1.2em;
+}
+
+.create-room-container {
+	display: flex;
+	justify-content: flex-end;
+	width: 60%;
+}
+
+.invisible {
+	display: none;
+}

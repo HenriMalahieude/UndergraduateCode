@@ -1,0 +1,29 @@
+<h1> Lab 7 Home</h1>
+<div class="chatroom-lister">
+	{{#each rooms}}
+		<div class="chatroom-detailer">
+			<div class="chatroom-meta">
+				<div class="cd-name">{{this.name}}</div>
+				<div class="cd-id">Id: {{this.id}}</div>
+			</div>
+
+			<button class="chatroom-joiner {{this.visible}}" onclick="window.location.href+='{{this.id}}'">Join</button>
+		</div>
+	{{/each}}
+
+	<!--
+	<div class="chatroom-detailer">
+		<div class="chatroom-meta">
+			<div class="cd-name">Extra Home Testing Room</div>
+			<div class="cd-id">id: 123asd</div>
+		</div>
+
+		<button class="chatroom-joiner" onclick="alert('joining!')">Join</button>
+	</div> 
+	-->
+</div>
+<div class="create-room-container">
+	<button onclick="createRoom()">Create Room</button>
+</div>
+
+<script src="js/homeClient.js"></script>
